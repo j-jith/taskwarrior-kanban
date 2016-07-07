@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <title>Taskwarrior Kanban View</title>
+</head>
+
+<body>
+
+<div id="pending">
+  <h3>Not started</h3>
+  <ul>
+  {% for task in pending_tasks %}
+    <li>{{ task }}</li>
+  {% endfor %}
+  </ul>
+</div>
+
+<div id="completed">
+  <h3>Done</h3>
+  <ul>
+  {% for task in completed_tasks %}
+  <li><s>{{ task }}</s></li>
+  {% endfor %}
+  </ul>
+</div>
+
+</body>
+</html>
