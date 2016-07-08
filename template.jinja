@@ -8,48 +8,48 @@
 
 <body>
 <div id='container'>
-        <div class="todo">
-          <h3>Not started</h3>
-          <table>
-          {% for task in todo_tasks %}
-          <tr><td>{{ loop.index }}.</td>
-              <td>{{ task.description }} 
-                  {% if 'project' in task %}
-                  <span class='project'>[{{ task.project }}]</span>
-                  {% endif %}
-              </td>
-          </tr>
-          {% endfor %}
-          </table>
-        </div>
-        <div class="started">
-          <h3>In progress</h3>
-          <table>
-          {% for task in started_tasks %}
-          <tr><td>{{ loop.index }}.</td>
-              <td>{{ task.description }}
-                  {% if 'project' in task %}
-                  <span class='project'>[{{ task.project }}]</span>
-                  {% endif %}
-              </td>
-          </tr>
-          {% endfor %}
-          </table>
-        </div>
-        <div class="completed">
-          <h3>Done</h3>
-          <table>
-          {% for task in completed_tasks %}
-          <tr><td>{{ loop.index }}.</td>
-              <td><s>{{ task.description }}</s>
-                  {% if 'project' in task %}
-                  <span class='project'>[{{ task.project }}]</span>
-                  {% endif %}
-              </td>
-          </tr>
-          {% endfor %}
-          </table>
-        </div>
+<div class="todo">
+  <h3>Not started</h3>
+  <table>
+  {% for task in todo_tasks %}
+  <tr><td>{{ loop.index }}.</td>
+      <td>{{ task.description }} 
+          {% if 'project' in task %}
+          <span class='project'>[{{ task.project }}]</span>
+          {% endif %}
+      </td>
+  </tr>
+  {% endfor %}
+  </table>
+</div>
+<div class="started">
+  <h3>In progress</h3>
+  <table>
+  {% for task in started_tasks %}
+  <tr><td>{{ loop.index }}.</td>
+      <td>{{ task.description }}
+          {% if 'project' in task %}
+          <span class='project'>[{{ task.project }}]</span>
+          {% endif %}
+      </td>
+  </tr>
+  {% endfor %}
+  </table>
+</div>
+<div class="completed">
+  <h3>Done</h3>
+  <table>
+  {% for task in completed_tasks %}
+  <tr><td>{{ loop.index }}.</td>
+      <td><s>{{ task.description }}</s>
+          {% if 'project' in task %}
+          <span class='project'>[{{ task.project }}]</span>
+          {% endif %}
+      </td>
+  </tr>
+  {% endfor %}
+  </table>
+</div>
 </div>
 </body>
 </html>
