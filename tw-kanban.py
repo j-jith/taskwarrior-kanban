@@ -36,19 +36,38 @@ def write_html(data, filename):
 
 if __name__ == '__main__':
 
-    # empty dictionary to be filled up and passed to jinja template rendering function
+    # empty master dictionary to be filled up and passed to jinja template rendering function
     tasks_dic = {} 
 
     # get pending tasks
     pending_tasks = get_tasks(['status:pending'])
-    # add pending tasks to dictionary
-    tasks_dic['pending_tasks'] = [task['description'] for task in pending_tasks]
 
-    # get completed tasks and add to dictionary
+
+    # get tasks to do
+    todo_tasks = [task for task in pending_tasks if 'start' not in task]
+    # sort tasks to do in descending order of urgency
+    todo_tasks = sorted(todo_tasks, key=lambda task: task['urgency'], reverse=True)
+
+    # get started tasks
+    started_tasks = [task for task in pending_tasks if 'start' in task]
+    # sort them
+    started_tasks = sorted(started_tasks, key=lambda task: task['urgency'], reverse=True)
+
+    # add pending tasks to master dictionary (task description and project)
+    tasks_dic['todo_tasks'] = [{'description': task['description'], 'project': task['project']} \
+                               if 'project' in task else {'description': task['description']} \
+                               for task in todo_tasks]
+    tasks_dic['started_tasks'] = [{'description': task['description'], 'project': task['project']} \
+                                  if 'project' in task else {'description': task['description']} \
+                                  for task in started_tasks]
+
+    # get completed tasks and add to master dictionary (same as above)
     completed_tasks =get_tasks(['status:completed']) 
-    tasks_dic['completed_tasks'] = [task['description'] for task in completed_tasks[:MAX_COMPLETED-1]]
+    tasks_dic['completed_tasks'] = [{'description': task['description'], 'project': task['project']} \
+                                    if 'project' in task else {'description': task['description']} \
+                                    for task in completed_tasks[:MAX_COMPLETED]]
 
-    # pass dictionary to render template and get html
+    # pass master dictionary to render template and get html
     html = render_template(tasks_dic)
 
     # write html to file
