@@ -72,7 +72,7 @@ h3 {
 <div id='container'>
 <div class="todo">
   <h3>Not started</h3>
-  <table>
+  <table width='100%'>
   {% for task in todo_tasks %}
   <tr><td>{{ loop.index }}.</td>
       <td>{{ task.description }} 
@@ -86,7 +86,7 @@ h3 {
 </div>
 <div class="started">
   <h3>In progress</h3>
-  <table>
+  <table width='100%'>
   {% for task in started_tasks %}
   <tr><td>{{ loop.index }}.</td>
       <td>{{ task.description }}
@@ -100,7 +100,7 @@ h3 {
 </div>
 <div class="completed">
   <h3>Done</h3>
-  <table>
+  <table width='100%'>
   {% for task in completed_tasks %}
   <tr><td>{{ loop.index }}.</td>
       <td><s>{{ task.description }}</s>
