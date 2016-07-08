@@ -16,6 +16,10 @@ and `tw-kanban.py` has to be run again to regenerate the board.*
 
 ## Prerequisites
 
-Requires the **jinja2** package: `pip3 install jinja2`.
+- [Taskwarrior](http://taskwarrior.org/download/) (Tested on version 2.5.0)
+
+- Python 3.0+
+
+- Requires the **jinja2** package: `pip3 install jinja2`.
 
 Feel free to request more features.
