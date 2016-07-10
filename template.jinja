@@ -64,6 +64,19 @@ h3 {
     font-style: italic;
     vertical-align: super;
 }
+
+.due_date {
+    font-size: 0.7em;
+    font-style: italic;
+}
+
+.warning {
+    font-size: 2em;
+    font-style: normal;
+    font-weight: bold;
+    color: #ff00ff;
+}
+
 </style>
 <title>Taskwarrior Personal Kanban Board</title>
 </head>
@@ -79,6 +92,13 @@ h3 {
           {% if 'project' in task %}
           <span class='project'>[{{ task.project }}]</span>
           {% endif %}
+          {% if 'due' in task %}
+          {% if task.due == 0 %}
+          <span class='warning'>⚠ </span><span class='due_date'>(Due today)</span>
+          {% else %}
+          <span class='due_date'>(Due in {{ task.due }} days)</span>
+          {% endif %}
+          {% endif %}
       </td>
   </tr>
   {% endfor %}
@@ -92,6 +112,13 @@ h3 {
       <td>{{ task.description }}
           {% if 'project' in task %}
           <span class='project'>[{{ task.project }}]</span>
+          {% endif %}
+          {% if 'due' in task %}
+          {% if task.due == 0 %}
+          <span class='warning'>⚠ </span><span class='due_date'>(Due today)</span>
+          {% else %}
+          <span class='due_date'>(Due in {{ task.due }} days)</span>
+          {% endif %}
           {% endif %}
       </td>
   </tr>
