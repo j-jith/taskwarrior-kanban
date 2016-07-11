@@ -22,4 +22,10 @@ and then `tw-kanban.py` has to be run again to regenerate the board.*
 
 - Requires the **jinja2** package: `pip3 install jinja2`.
 
+## Usage
+
+- `python3 tw-kanban.py`
+
+- Open `index.html` in your favourite browser. I recommend setting it as your homepage.
+
 Feel free to request more features.
