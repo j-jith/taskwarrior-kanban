@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import subprocess
 import json
 import jinja2
@@ -49,7 +51,7 @@ def write_html(data, filename):
     with open(filename, 'w') as f:
         f.write(data)
 
-if __name__ == '__main__':
+def main():
 
     # empty master dictionary to be filled up and passed to jinja template rendering function
     tasks_dic = {} 
@@ -85,3 +87,7 @@ if __name__ == '__main__':
 
     # write html to file
     write_html(html, 'index.html')
+
+
+if __name__ == '__main__':
+    main()
