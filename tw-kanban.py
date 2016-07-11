@@ -4,6 +4,9 @@ import subprocess
 import json
 import jinja2
 import datetime
+import os
+
+SCRIPT_PATH = os.path.dirname(__file__)
 
 MAX_COMPLETED = 10 # max. no. of completed tasks to display
 
@@ -37,7 +40,7 @@ def check_due_date(tasks):
 def render_template(tasks_dic):
 
     # jinja stuff to load template
-    template_loader = jinja2.FileSystemLoader(searchpath='./')
+    template_loader = jinja2.FileSystemLoader(searchpath=SCRIPT_PATH)
     template_env = jinja2.Environment(loader=template_loader)
     template_file = 'template.jinja'
     template = template_env.get_template(template_file)
@@ -86,7 +89,7 @@ def main():
     html = render_template(tasks_dic)
 
     # write html to file
-    write_html(html, 'index.html')
+    write_html(html, SCRIPT_PATH + '/index.html')
 
 
 if __name__ == '__main__':

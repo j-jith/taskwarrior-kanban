@@ -95,6 +95,8 @@ h3 {
           {% if 'due' in task %}
           {% if task.due == 0 %}
           <span class='warning'>⚠ </span><span class='due_date'>(Due today)</span>
+          {% elif task.due < 0 %}
+          <span class='due_date'>(Overdue)</span>
           {% else %}
           <span class='due_date'>(Due in {{ task.due }} days)</span>
           {% endif %}
@@ -116,6 +118,8 @@ h3 {
           {% if 'due' in task %}
           {% if task.due == 0 %}
           <span class='warning'>⚠ </span><span class='due_date'>(Due today)</span>
+          {% elif task.due < 0 %}
+          <span class='due_date'>(Overdue)</span>
           {% else %}
           <span class='due_date'>(Due in {{ task.due }} days)</span>
           {% endif %}
