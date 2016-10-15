@@ -1,5 +1,7 @@
 # taskwarrior-kanban: Personal Kanban Board for Taskwarrior.
 
+<a href="screenshot.png?raw=true"><img src="screenshot.png?raw=true" width="500"></a>
+
 `tw-kanban.py` is a Python(3) script which provides a simple [personal
 Kanban](http://lifehacker.com/productivity-101-how-to-use-personal-kanban-to-visuali-1687948640)
 board for the task management tool [Taskwarrior](taskwarrior.org). It sorts your tasks into the
