@@ -5,6 +5,7 @@ import json
 import jinja2
 import datetime
 import os
+import sys
 
 SCRIPT_PATH = os.path.dirname(__file__)
 
@@ -13,7 +14,10 @@ MAX_COMPLETED = 10 # max. no. of completed tasks to display
 def get_tasks(tags):
 
     # run taskwarrior export
-    command = ['task', 'rc.json.depends.array=no', 'export'] + tags 
+    try:
+        command = ['task', 'rc.json.depends.array=no', sys.argv[1], 'export'] + tags 
+    except:
+        command = ['task', 'rc.json.depends.array=no', 'export'] + tags 
     data = subprocess.check_output(command) 
     data = data.decode('utf-8') # decode bytestring to string
     data = data.replace('\n','') # remove newline indicators
