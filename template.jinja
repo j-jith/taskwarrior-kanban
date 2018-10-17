@@ -77,6 +77,12 @@ h3 {
     color: #ff00ff;
 }
 
+.uuid {
+    font-size: 0.5em;
+    padding-right: 0.5em;
+}
+
+
 </style>
 <title>Taskwarrior Personal Kanban Board</title>
 </head>
@@ -133,7 +139,7 @@ h3 {
   <h3>Done</h3>
   <table width='100%'>
   {% for task in completed_tasks %}
-  <tr><td>{{ loop.index }}.</td>
+  <tr><td class="uuid">{{ task.uuid[:4] + '<wbr>' + task.uuid[4:8] }}</td>
       <td><s>{{ task.description }}</s>
           {% if 'project' in task %}
           <span class='project'>[{{ task.project }}]</span>
