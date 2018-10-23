@@ -7,7 +7,7 @@ import datetime
 import os
 import sys
 
-SCRIPT_PATH = os.path.dirname(__file__)
+SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 MAX_COMPLETED = 10 # max. no. of completed tasks to display
 
