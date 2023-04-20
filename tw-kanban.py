@@ -86,8 +86,8 @@ def main():
     tasks_dic['started_tasks'] = started_tasks
 
     # get completed tasks and add to master dictionary (same as above)
-    completed_tasks = get_tasks(['status:completed']) 
-    tasks_dic['completed_tasks'] = completed_tasks[:MAX_COMPLETED]
+    completed_tasks = get_tasks(['status:completed', f'limit:{MAX_COMPLETED}'])
+    tasks_dic['completed_tasks'] = completed_tasks
 
     # pass master dictionary to render template and get html
     html = render_template(tasks_dic)
