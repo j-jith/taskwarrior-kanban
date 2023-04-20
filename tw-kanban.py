@@ -9,6 +9,7 @@ import sys
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+MAX_PENDING = 25
 MAX_COMPLETED = 10 # max. no. of completed tasks to display
 
 def get_tasks(tags):
@@ -58,13 +59,13 @@ def write_html(data, filename):
     with open(filename, 'w') as f:
         f.write(data)
 
-def main():
+def main(additional_filters=[]):
 
     # empty master dictionary to be filled up and passed to jinja template rendering function
     tasks_dic = {} 
 
     # get pending tasks
-    pending_tasks = get_tasks(['status:pending'])
+    pending_tasks = get_tasks(['status:pending', f'limit:{MAX_PENDING}'] + additional_filters)
 
 
     # get tasks to do
@@ -86,7 +87,7 @@ def main():
     tasks_dic['started_tasks'] = started_tasks
 
     # get completed tasks and add to master dictionary (same as above)
-    completed_tasks = get_tasks(['status:completed', f'limit:{MAX_COMPLETED}'])
+    completed_tasks = get_tasks(['status:completed', f'limit:{MAX_COMPLETED}'] + additional_filters)
     tasks_dic['completed_tasks'] = completed_tasks
 
     # pass master dictionary to render template and get html
@@ -97,4 +98,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
