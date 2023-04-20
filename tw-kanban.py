@@ -72,7 +72,7 @@ def main(additional_filters=[]):
     check_due_date(todo_tasks)
 
     # get started tasks
-    started_tasks = [task for task in pending_tasks if 'start' in task]
+    started_tasks = get_tasks(['+ACTIVE'] + additional_filters)
     # sort tasks by urgency (descending order)
     started_tasks = sorted(started_tasks, key=lambda task: task['urgency'], reverse=True)
     # check due dates
