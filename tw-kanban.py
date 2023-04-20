@@ -15,9 +15,9 @@ def get_tasks(tags):
 
     # run taskwarrior export
     try:
-        command = ['task', 'rc.json.depends.array=no', sys.argv[1], 'export'] + tags 
+        command = ['task', 'rc.json.depends.array=no', sys.argv[1]] + tags + ['export']
     except:
-        command = ['task', 'rc.json.depends.array=no', 'export'] + tags 
+        command = ['task', 'rc.json.depends.array=no'] + tags + ['export']
     data = subprocess.check_output(command) 
     data = data.decode('utf-8') # decode bytestring to string
     data = data.replace('\n','') # remove newline indicators
