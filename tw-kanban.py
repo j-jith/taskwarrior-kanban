@@ -9,15 +9,12 @@ import sys
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+MAX_PENDING = 1000
 MAX_COMPLETED = 10 # max. no. of completed tasks to display
 
 def get_tasks(tags):
 
-    # run taskwarrior export
-    try:
-        command = ['task', 'rc.json.depends.array=no', sys.argv[1], 'export'] + tags 
-    except:
-        command = ['task', 'rc.json.depends.array=no', 'export'] + tags 
+    command = ['task', 'rc.json.depends.array=no'] + tags + ['export']
     data = subprocess.check_output(command) 
     data = data.decode('utf-8') # decode bytestring to string
     data = data.replace('\n','') # remove newline indicators
@@ -58,13 +55,13 @@ def write_html(data, filename):
     with open(filename, 'w') as f:
         f.write(data)
 
-def main():
+def main(additional_filters=[]):
 
     # empty master dictionary to be filled up and passed to jinja template rendering function
     tasks_dic = {} 
 
     # get pending tasks
-    pending_tasks = get_tasks(['status:pending'])
+    pending_tasks = get_tasks(['status:pending', f'limit:{MAX_PENDING}'] + additional_filters)
 
 
     # get tasks to do
@@ -75,7 +72,7 @@ def main():
     check_due_date(todo_tasks)
 
     # get started tasks
-    started_tasks = [task for task in pending_tasks if 'start' in task]
+    started_tasks = get_tasks(['+ACTIVE'] + additional_filters)
     # sort tasks by urgency (descending order)
     started_tasks = sorted(started_tasks, key=lambda task: task['urgency'], reverse=True)
     # check due dates
@@ -86,8 +83,8 @@ def main():
     tasks_dic['started_tasks'] = started_tasks
 
     # get completed tasks and add to master dictionary (same as above)
-    completed_tasks = get_tasks(['status:completed']) 
-    tasks_dic['completed_tasks'] = completed_tasks[:MAX_COMPLETED]
+    completed_tasks = get_tasks(['status:completed', f'limit:{MAX_COMPLETED}'] + additional_filters)
+    tasks_dic['completed_tasks'] = completed_tasks
 
     # pass master dictionary to render template and get html
     html = render_template(tasks_dic)
@@ -97,4 +94,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])
